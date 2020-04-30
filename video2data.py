@@ -1,22 +1,29 @@
+path="try_vid/"
+import os
 import cv2
-imag=[]
-cam=cv2.VideoCapture('y2mate.com - one_punch_man_official_trailer_2JAElThbKrI_720p.mp4')
-i=0
-while True:
-    ret,image=cam.read()
-    if ret:
-         #print(i)
+folders=os.listdir(path)
+for j,folder in enumerate(folders):
+   os.mkdir(folder)
+   path_to_folder=os.path.join(path,folder)
+   anime_vid=os.listdir(path_to_folder)
+   for vid in anime_vid:
+     path_to_videos=os.path.join(path_to_folder,vid)
+     cam=cv2.VideoCapture(path_to_videos)
+     i=0
+     while True:
+       ret,image=cam.read()
+       if ret:
          i=i+1
-        # cv2.imshow('img',image)
-         #name="image"
-         name="opm_try{}im.png".format(i)
-         path='folder/'+name
-         print(path)
+         print(folder)
+         name="try{}tis{}.png".format(j,i)
+         folder_name=os.path.join(folder,name)
          if(i%5==0):
-           print(i)
-           print("saved")
-           cv2.imwrite(path,image)
-         #print(image)
-        
-    else:
-        break
+           print("[]"+folder_name+" saved")
+           cv2.imwrite(folder_name,image)
+           
+         
+       else:
+         print("=====================================================================================================================")
+         print(folder+" done")
+         print("=====================================================================================================================")
+         break
